@@ -1,6 +1,6 @@
 # Suspicious PowerShell Activity Detection Rule for Microsoft Sentinel
 
-This repository contains a KQL (Kusto Query Language) query and instructions for setting up an **Analytics Rule** in Microsoft Sentinel to detect suspicious PowerShell activity. The rule is designed to identify high-risk PowerShell command executions, such as those involving remote sessions, execution policy bypass, or suspicious command patterns.
+KQL (Kusto Query Language) query and instructions for setting up an **Analytics Rule** in Microsoft Sentinel to detect suspicious PowerShell activity. The rule is designed to identify high-risk PowerShell command executions, such as those involving remote sessions, execution policy bypass, or suspicious command patterns.
 
 ---
 
