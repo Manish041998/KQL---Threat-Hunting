@@ -20,8 +20,6 @@ The query detects PowerShell command executions that may indicate malicious acti
 
 ## **KQL Query**
 
-The query is available in the [`powershell_detection_rule.kql`](powershell_detection_rule.kql) file. Here’s a preview:
-
 ```kql
 DeviceEvents
 | where TimeGenerated >= ago(24h)  // Limit to the last 24 hours for real-time detection
