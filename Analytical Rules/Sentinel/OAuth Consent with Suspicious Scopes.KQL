@@ -1,0 +1,16 @@
+AuditLogs
+| where OperationName == "Consent to application"
+| extend Initiator = tostring(InitiatedBy.user.userPrincipalName),
+         IPAddress = tostring(InitiatedBy.user.ipAddress),
+         AppDetails = parse_json(TargetResources)
+| mv-expand AppDetails
+| extend AppDisplayName = tostring(AppDetails.displayName),
+         AppId = tostring(AppDetails.id),
+         ModifiedProps = AppDetails.modifiedProperties
+| mv-expand Prop = ModifiedProps
+| extend PropName = tostring(Prop.displayName),
+         NewValue = tostring(Prop.newValue)
+| where PropName == "ConsentAction.Permissions"
+| extend ScopesExtracted = extract(@"Scope:\s(.+?),", 1, NewValue)
+//| where ScopesExtracted has_any ("Files.Read.All", "Sites.Read.All", "offline_access", "email", "User.Read")
+| project TimeGenerated, Initiator, IPAddress, AppDisplayName, AppId, Scope = ScopesExtracted, Result, Location
